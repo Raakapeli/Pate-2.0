@@ -107,6 +107,15 @@ public class Main{
 					leftMotor.stop();
 					rightMotor.stop();
 					
+					Delay.msDelay(500);
+					rightMotor.stop(true);
+					rightMotor.forward();
+					leftMotor.stop();
+					leftMotor.backward();
+					Delay.msDelay(1000);
+					
+					leftMotor.stop();
+					rightMotor.stop();
 				} else {
 					continue;				
 				}
