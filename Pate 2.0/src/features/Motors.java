@@ -81,7 +81,52 @@ public class Motors {
 		rightT.motorStop();
 		rightT.motorBackward();
 	}
+	public static void rightForwardLeftBackward(Motors leftT, Motors rightT){
+		LCD.clear();
+		Button.LEDPattern(0);
+		rightT.motorStop();
+		leftT.motorStop();
+		rightT.motorForward();
+		leftT.motorBackward();
+	}
+	public static void rightForwardLeftForward(Motors leftT, Motors rightT){
+		LCD.clear();
+		Button.LEDPattern(0);
+        leftT.motorStop();
+        rightT.motorStop();
+        leftT.motorForward();
+        rightT.motorForward();
+	}
+	public static void rightBackwardLeftBackward(Motors leftT, Motors rightT){
+		LCD.clear();
+		Button.LEDPattern(0);
+        leftT.motorStop();
+        rightT.motorStop();
+        leftT.motorBackward();
+        rightT.motorBackward();
+	}
+	public static void rightStopLeftStop(Motors leftT, Motors rightT){
+		LCD.clear();
+		Button.LEDPattern(0);
+        leftT.motorStop();
+        rightT.motorStop();
+	}
+	public static void SawsOn(Motors leftH, Motors rightH){
+		LCD.clear();
+		Button.LEDPattern(0);
+		leftH.motorStop();
+		rightH.motorStop();
+		leftH.motorForward();
+		rightH.motorForward();
+	}
+	public static void SawsOff(Motors leftH, Motors rightH){
+		LCD.clear();
+		Button.LEDPattern(0);
+		leftH.motorStop();
+		rightH.motorStop();
+	}
 }
+
 
 
 
