@@ -41,239 +41,102 @@ public class Main{
 		EV3TouchSensor tSensor = new EV3TouchSensor(SensorPort.S1);
 		Touchsensor ts = new Touchsensor(tSensor);
 		
-		EV3ColorSensor ambientmode = new EV3ColorSensor(SensorPort.S3);
-		Colorsensor lightsensor = new Colorsensor(ambientmode);
+		EV3ColorSensor cSensor = new EV3ColorSensor(SensorPort.S3);
+		Colorsensor ColorS = new Colorsensor(cSensor);
 		
 		remoteChecker.start();		
 		float[] touch = new float[tSensor.sampleSize()];
-//		float[] ambient = new float[ambientmode.sampleSize()];
-//		double ambient = ambientmode.fetchsample(ambient,0);
+
+
 		String emergency = "EMERGENCY STOP";
-//		String sun = "Sun is shining!!";
-//		if(ambient > 0.2){
-//			LCD.clear();
-//			LCD.drawString(sun, 0, 1);
-//		}
+		String sun = "Sun is shining!!";
+		String ok = "ok";
+		if(ColorS.getColorValue() == 3){
+			LCD.clear();
+			LCD.drawString(sun, 0, 1);
+		}else{
+			LCD.clear();
+			LCD.drawString(ok, 0, 1);
+		}
 		Button.LEDPattern(0);
 		LCD.clear();
 		
 		while (!Button.ESCAPE.isDown()){
 			int cmd = remoteChecker.getRemoteCmd();
 			touch = ts.getTouched();
-			lightsensor.getAmbientValue();
+			//lightsensor.getAmbientValue();
 			
-//			if (cmd == 1){
-//				
-//				Motors.leftMotorForward(leftTrack, rightTrack);
-//				LCD.clear();
-//				Button.LEDPattern(0);
-//		        rightTrack.motorStop();
-//		        leftTrack.motorStop();
-//		        leftTrack.motorForward();
-//			} else if (cmd == 3){
-//				
-//				Motors.rightMotorForward(leftTrack, rightTrack);
-//				LCD.clear();
-//				Button.LEDPattern(0);
-//		        leftTrack.motorStop();
-//		        rightTrack.motorStop();
-//		        rightTrack.motorForward();
-//			} else if (cmd == 4){
-//				LCD.clear();
-//				Button.LEDPattern(0);
-//			    leftTrack.motorStop();
-//			    rightTrack.motorStop();
-//			    rightTrack.motorBackward();
-//			} else if (cmd == 2){
-//				LCD.clear();	
-//				Button.LEDPattern(0);
-//			    rightTrack.motorStop();
-//			    leftTrack.motorStop();
-//			    leftTrack.motorBackward();
-//			} else if (cmd == 6){
-//				LCD.clear();
-//				Button.LEDPattern(0);
-//				leftTrack.motorStop();
-//				leftTrack.motorForward();
-//				rightTrack.motorStop();
-//				rightTrack.motorBackward();
-//			} else if (cmd == 7){
-//				LCD.clear();
-//				Button.LEDPattern(0);
-//				rightTrack.motorStop();
-//				rightTrack.motorForward();
-//				leftTrack.motorStop();
-//				leftTrack.motorBackward();
-//			} else if (cmd == 5){
-//				LCD.clear();
-//				Button.LEDPattern(0);
-//		        leftTrack.motorStop();
-//		        rightTrack.motorStop();
-//		        leftTrack.motorForward();
-//		        rightTrack.motorForward();
-//			} else if (cmd == 8){
-//				LCD.clear();
-//				Button.LEDPattern(0);
-//		        leftTrack.motorStop();
-//		        rightTrack.motorStop();
-//		        leftTrack.motorBackward();
-//		        rightTrack.motorBackward();
-//			} else if (cmd == 9){
-//				LCD.clear();
-//				Button.LEDPattern(0);
-//		        leftTrack.motorStop();
-//		        rightTrack.motorStop();
-//			} else if (cmd == 10){
-//				LCD.clear();
-//				Button.LEDPattern(0);
-//				leftCircularsaw.motorStop();
-//				rightCircularsaw.motorStop();
-//				leftCircularsaw.motorForward();
-//				rightCircularsaw.motorForward();
-//			} else if (cmd == 11){
-//				LCD.clear();
-//				Button.LEDPattern(0);
-//				leftCircularsaw.motorStop();
-//				rightCircularsaw.motorStop();
-//			} else {
-//				continue;
-//			}
-			
-			switch (cmd){
-				case 3: 						//right forward, left stop
-					
-				Motors.rightMotorForward(leftTrack, rightTrack);
-//				LCD.clear();
-//				Button.LEDPattern(0);
-//		        leftTrack.motorStop();
-//		        rightTrack.motorStop();
-//		        rightTrack.motorForward();
-		        break;
-				case 1: 						//left forward, right stop
-					
+			if (cmd == 1){
+				
 				Motors.leftMotorForward(leftTrack, rightTrack);
-//				LCD.clear();
-//				Button.LEDPattern(0);
-//		        rightTrack.motorStop();
-//		        leftTrack.motorStop();
-//		        leftTrack.motorForward();
-		        break;
-				case 4: 						//right backward, left stop
-					
-				Motors.rightMotorBackward(leftTrack, rightTrack);
-//				LCD.clear();
-//				Button.LEDPattern(0);
-//			    leftTrack.motorStop();
-//			    rightTrack.motorStop();
-//			    rightTrack.motorBackward();
-			    break;
-				case 2: 						//left backward, right stop
-					
-				Motors.leftMotorBackward(leftTrack, rightTrack);
-//				LCD.clear();	
-//				Button.LEDPattern(0);
-//			    rightTrack.motorStop();
-//			    leftTrack.motorStop();
-//			    leftTrack.motorBackward();
-			    break;
-				case 6: 						//right backward, left forward
-					
-				Motors.rightBackwardLeftForward(leftTrack, rightTrack);
-//				LCD.clear();
-//				Button.LEDPattern(0);
-//				leftTrack.motorStop();
-//				leftTrack.motorForward();
-//				rightTrack.motorStop();
-//				rightTrack.motorBackward();
-				break;
-				case 7: 						//left backward, right forward
-				LCD.clear();
-				Button.LEDPattern(0);
-				rightTrack.motorStop();
-				rightTrack.motorForward();
-				leftTrack.motorStop();
-				leftTrack.motorBackward();
-				break;
-				case 5:  						// both forward
-				LCD.clear();
-				Button.LEDPattern(0);
-		        leftTrack.motorStop();
-		        rightTrack.motorStop();
-		        leftTrack.motorForward();
-		        rightTrack.motorForward();
-		        break;
-				case 8:  						// both backward
-				LCD.clear();
-				Button.LEDPattern(0);
-		        leftTrack.motorStop();
-		        rightTrack.motorStop();
-		        leftTrack.motorBackward();
-		        rightTrack.motorBackward();
-		        break;
-				case 9: 						//stop
-				LCD.clear();
-				Button.LEDPattern(0);
-		        leftTrack.motorStop();
-		        rightTrack.motorStop();
-		        break;
-				case 10:
-				LCD.clear();
-				Button.LEDPattern(0);
-				leftCircularsaw.motorStop();
-				rightCircularsaw.motorStop();
-				leftCircularsaw.motorForward();
-				rightCircularsaw.motorForward();
-				break;
-				case 11:
-				LCD.clear();
-				Button.LEDPattern(0);
-				leftCircularsaw.motorStop();
-				rightCircularsaw.motorStop();
-				break;
-				}				
-				
-				if (touch[0] == 1){
-					
-					Touchsensor.goBackward(leftTrack, rightTrack, leftCircularsaw, rightCircularsaw, emergency);
-					
-//					Button.LEDPattern(8);
-//					LCD.clear();
-//					LCD.drawString(emergency, 0, 3);
-//					leftCircularsaw.motorStop();
-//					rightCircularsaw.motorStop();
-//					leftTrack.motorStop();
-//					rightTrack.motorStop();
-//					Delay.msDelay(500);
-//					leftTrack.motorBackward();
-//					rightTrack.motorBackward();
-//					Delay.msDelay(3000);
-//					leftTrack.motorStop();
-//					rightTrack.motorStop();
-//					
-//					Delay.msDelay(500);			
-//					rightTrack.motorForward();
-//					leftTrack.motorBackward();
-//					Delay.msDelay(2000);
-//					
-//					leftTrack.motorStop();
-//					rightTrack.motorStop();
-				} else {
-					continue;				
-				}
-			}
-				
-			Motors.stopMotor(remoteChecker, leftMotor, rightMotor, rightHand, leftHand, tSensor, irSensor, ambientmode);
-			
-//			remoteChecker.stopSampling();
-//			leftMotor.close();
-//			rightMotor.close();
-//			rightHand.close();
-//			leftHand.close();
-//			tSensor.close();
-//			irSensor.close();
-//			ambientmode.close();
-		}
-	}
 
+			} else if (cmd == 3){
+				
+				Motors.rightMotorForward(leftTrack, rightTrack);
+
+			} else if (cmd == 4){
+				
+				Motors.rightMotorBackward(leftTrack, rightTrack);
+				
+			} else if (cmd == 2){
+				
+				Motors.leftMotorBackward(leftTrack, rightTrack);
+				
+			} else if (cmd == 6){
+				
+				Motors.rightBackwardLeftForward(leftTrack, rightTrack);
+				
+			} else if (cmd == 7){
+				
+				Motors.rightForwardLeftBackward(leftTrack, rightTrack);
+				
+			} else if (cmd == 5){
+				
+				Motors.rightForwardLeftForward(leftTrack, rightTrack);
+				
+			} else if (cmd == 8){
+				
+				Motors.rightBackwardLeftBackward(leftTrack, rightTrack);
+				
+			} else if (cmd == 9){
+				
+				Motors.rightStopLeftStop(leftTrack, rightTrack);
+				
+			} else if (cmd == 10){
+				
+				Motors.SawsOn(leftCircularsaw, rightCircularsaw);
+				
+			} else if (cmd == 11){
+				
+				Motors.SawsOff(leftCircularsaw, rightCircularsaw);
+				
+			}else if(touch[0] == 1){
+				
+				Touchsensor.goBackward(leftTrack, rightTrack, leftCircularsaw, rightCircularsaw, emergency);
+			
+			}else if(ColorS.getColorValue() == 7){
+				LCD.clear();
+				LCD.drawString(sun, 0, 1);
+				
+			}
+			else {
+				
+				LCD.clear();
+				LCD.drawString(ok, 0, 1);
+				continue;
+			}
+
+		}
+			
+		remoteChecker.stopSampling();
+		leftMotor.close();
+		rightMotor.close();
+		rightHand.close();
+		leftHand.close();
+		tSensor.close();
+		irSensor.close();
+		//ambientmode.close();
+	}
+}
 
 
