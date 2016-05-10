@@ -17,13 +17,14 @@ public class IRSCheckerForRemote extends Thread{
 	public int getRemoteCmd(){
 		return this.remoteCmd;
   	}
-  
-	public void stopSampling(){
-		this.stopSampling = true;
-	}
+
 	public void run(){
 		while (!this.stopSampling) {
 			this.remoteCmd = this.irSensor.getRemoteCommand(0);
 		}
+	}
+
+	public void stopSampling() {
+		this.stopSampling = true;
 	}
 }
