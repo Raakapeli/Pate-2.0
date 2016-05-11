@@ -26,15 +26,15 @@ public class Touchsensor{
 		
 	}
 
-	/**
-	 *  ??    TARVIIKO TÄTÄ    ??
-	 * @return
-	 */
-	public float[] getTouched(){
-		float[] touch = new float[tSensor.sampleSize()];
-		tSensor.fetchSample(touch, 0);
-		return touch;	
-	}
+//	/**
+//	 *  ??    TARVIIKO TÄTÄ    ??										POISTA JOS KOODI TOIMIII ! ! ! ! ! ! ! ! !
+//	 * @return
+//	 */
+//	public float[] getTouched(){
+//		float[] touch = new float[tSensor.sampleSize()];
+//		tSensor.fetchSample(touch, 0);
+//		return touch;	
+//	}
 	
 	/**
 	 * When the touch sensor is pressed the robot will go backwards and then turn another way
