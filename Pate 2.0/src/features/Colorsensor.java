@@ -2,6 +2,8 @@ package features;
 
 import lejos.hardware.Button;
 import lejos.hardware.lcd.LCD;
+import lejos.hardware.motor.EV3LargeRegulatedMotor;
+import lejos.hardware.port.MotorPort;
 import lejos.hardware.sensor.EV3ColorSensor;
 import lejos.utility.Delay;
 
@@ -14,6 +16,11 @@ import lejos.utility.Delay;
  * @version 2.0 10.5.2016
  */
 public class Colorsensor{
+	
+	static EV3LargeRegulatedMotor rightHand = new EV3LargeRegulatedMotor(MotorPort.C);
+	static EV3LargeRegulatedMotor leftHand = new EV3LargeRegulatedMotor(MotorPort.D);
+	static Motors leftCircularsaw = new Motors(leftHand);
+	static Motors rightCircularsaw = new Motors(rightHand);
 	
 	private EV3ColorSensor cSensor;
 	
@@ -41,7 +48,8 @@ public class Colorsensor{
 		LCD.clear();												
 		LCD.drawString("PUNAINEN!", 0, 1);							
 		Button.LEDPattern(2);
-		Delay.msDelay(4000);
+		Motors.SawsOff(leftCircularsaw, rightCircularsaw);
+		Delay.msDelay(4000);		
 		LCD.clear();
 		Button.LEDPattern(0);
 	}
@@ -53,6 +61,7 @@ public class Colorsensor{
 		LCD.clear();
 		LCD.drawString("VIHREA!", 0, 1);
 		Button.LEDPattern(1);
+		Motors.SawsOn(leftCircularsaw, rightCircularsaw);
 		Delay.msDelay(4000);
 		LCD.clear();
 		Button.LEDPattern(0);
@@ -65,6 +74,7 @@ public class Colorsensor{
 		LCD.clear();
 		LCD.drawString("KELTAINEN!", 0, 1);
 		Button.LEDPattern(3);
+		Motors.SawsOff(leftCircularsaw, rightCircularsaw);
 		Delay.msDelay(4000);
 		LCD.clear();
 		Button.LEDPattern(0);
