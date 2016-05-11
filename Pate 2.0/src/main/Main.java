@@ -8,6 +8,7 @@ import lejos.hardware.port.SensorPort;
 import lejos.hardware.sensor.EV3ColorSensor;
 import lejos.hardware.sensor.EV3IRSensor;
 import lejos.hardware.sensor.EV3TouchSensor;
+import lejos.robotics.Color;
 import lejos.utility.Delay;
 import features.IRSCheckerForRemote;
 import features.Colorsensor;
@@ -15,7 +16,7 @@ import features.Motors;
 import features.Touchsensor;
 
 /**
- * 
+ * Pate 2.0
  * @author Joonas Järvinen
  * @author Joni Niskasaari
  * @author Juho Ranta
@@ -49,15 +50,17 @@ public class Main{
 
 
 		String emergency = "EMERGENCY STOP";
-		String sun = "Sun is shining!!";
-		String ok = "ok";
-		if(ColorS.getColorValue() == 3){
-			LCD.clear();
-			LCD.drawString(sun, 0, 1);
-		}else{
-			LCD.clear();
-			LCD.drawString(ok, 0, 1);
-		}
+//		String sun = "Sun is shining!!";
+//		String ok = "ok";
+//		
+//		if(ColorS.getColorValue() == 3){
+//			LCD.clear();
+//			LCD.drawString(sun, 0, 1);
+//		}else{
+//			LCD.clear();
+//			LCD.drawString(ok, 0, 1);
+//		}
+		
 		Button.LEDPattern(0);
 		LCD.clear();
 		
@@ -110,22 +113,23 @@ public class Main{
 				
 				Motors.SawsOff(leftCircularsaw, rightCircularsaw);
 				
-			}else if(touch[0] == 1){
+			} else if (ColorS.getColorValue() == Color.RED){
 				
-				Touchsensor.goBackward(leftTrack, rightTrack, leftCircularsaw, rightCircularsaw, emergency);
-			
-			}else if(ColorS.getColorValue() == 7){
+				Colorsensor.showRed();										
+
+			} else if (ColorS.getColorValue() == Color.GREEN){
+				
+				Colorsensor.showGreen();
+				
+			} else if (ColorS.getColorValue() == Color.YELLOW){
+				
+				Colorsensor.showYellow();
+				
+			} else {
+				
 				LCD.clear();
-				LCD.drawString(sun, 0, 1);
-				
-			}
-			else {
-				
-				LCD.clear();
-				LCD.drawString(ok, 0, 1);
 				continue;
 			}
-
 		}
 			
 		remoteChecker.stopSampling();
@@ -138,5 +142,3 @@ public class Main{
 		//ambientmode.close();
 	}
 }
-
-
