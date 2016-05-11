@@ -47,19 +47,7 @@ public class Main{
 		
 		remoteChecker.start();		
 		float[] touch = new float[tSensor.sampleSize()];
-
-
 		String emergency = "EMERGENCY STOP";
-//		String sun = "Sun is shining!!";
-//		String ok = "ok";
-//		
-//		if(ColorS.getColorValue() == 3){
-//			LCD.clear();
-//			LCD.drawString(sun, 0, 1);
-//		}else{
-//			LCD.clear();
-//			LCD.drawString(ok, 0, 1);
-//		}
 		
 		Button.LEDPattern(0);
 		LCD.clear();
@@ -67,7 +55,6 @@ public class Main{
 		while (!Button.ESCAPE.isDown()){
 			int cmd = remoteChecker.getRemoteCmd();
 			touch = ts.getTouched();
-			//lightsensor.getAmbientValue();
 			
 			if (cmd == 1){
 				
@@ -113,6 +100,10 @@ public class Main{
 				
 				Motors.SawsOff(leftCircularsaw, rightCircularsaw);
 				
+			} else if(touch[0] > 0){
+				
+				Touchsensor.goBackward(leftTrack, rightTrack, leftCircularsaw, rightCircularsaw, emergency);
+				
 			} else if (ColorS.getColorValue() == Color.RED){
 				
 				Colorsensor.showRed();										
@@ -139,6 +130,5 @@ public class Main{
 		leftHand.close();
 		tSensor.close();
 		irSensor.close();
-		//ambientmode.close();
 	}
 }
